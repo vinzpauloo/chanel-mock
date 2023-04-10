@@ -1,0 +1,96 @@
+.wrapper {
+  display: flex;
+  position: relative;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    padding-top: 100px;
+  }
+  .left,
+  .right {
+    position: relative;
+    height: 100dvh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    @media (max-width: 1024px) {
+      height: 50dvh;
+    }
+
+    &:hover .image {
+      transform: scale(1.2);
+    }
+  }
+
+  .image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    transition: 0.25s ease all;
+  }
+  .left {
+    .man {
+      background-image: url(../assets/images/fashon_men.jpg);
+    }
+  }
+  .right {
+    .woman {
+      background-image: url(../assets/images/fashion_woman.jpg);
+    }
+  }
+
+  .side::before {
+    background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.2721463585434174) 100%
+    );
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    content: "";
+    display: block;
+  }
+
+  .caption {
+    z-index: 10;
+    text-align: center;
+    color: #fff;
+
+    .header {
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      font-weight: 900;
+      font-size: 25px;
+    }
+
+    .link {
+      text-decoration: none;
+      .landingBtn {
+        color: white;
+        background-color: black;
+        padding: 1em 2em;
+        font-weight: 600;
+        font-size: 1em;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        transition: 0.25s ease all;
+
+        &:hover {
+          background-color: #ffd346;
+          color: black;
+        }
+      }
+    }
+  }
+}
