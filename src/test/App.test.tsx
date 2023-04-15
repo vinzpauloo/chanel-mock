@@ -1,7 +1,7 @@
 import { render, screen, renderHook } from "@testing-library/react";
-import App from "./App";
+import App from "../App";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Home from "./pages/Home";
+import Home from "../pages/Home";
 import { it } from "vitest";
 
 // import matchers from "@testing-library/jest-dom";

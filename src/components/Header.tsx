@@ -58,6 +58,8 @@ const TopTabNavigation = (props: TopTabNavigationProps) => {
         label="About Margaux"
         sx={{ ...styles.menu, ml: marginLeft }}
       />
+      {/* Tab value 11 is used as a placeholder, so we can render the default Landing Page without MUI errors */}
+      <Tab value="11" sx={{ visibility: "hidden" }} />
     </Tabs>
   );
 };
@@ -70,7 +72,12 @@ const Header = ({ open, setOpen }: HeaderProps) => {
     setOpen((prev) => !prev);
   }, [setOpen, open]);
 
-  const { activeContent } = useContentContext();
+  const { activeContent, setActiveContent } = useContentContext();
+
+  const handleClick = useCallback(() => {
+    setActiveContent("11");
+    navigate("/");
+  }, [setActiveContent, navigate]);
 
   return (
     <>
@@ -83,10 +90,8 @@ const Header = ({ open, setOpen }: HeaderProps) => {
           </IconButton>
         </Box>
         <Box>
-          <Button>
-            <Typography sx={styles.titleText} onClick={() => navigate("/")}>
-              Margaux
-            </Typography>
+          <Button onClick={handleClick}>
+            <Typography sx={styles.titleText}>Margaux</Typography>
           </Button>
         </Box>
       </Box>

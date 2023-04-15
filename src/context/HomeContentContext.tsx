@@ -7,7 +7,7 @@ interface ContentContextData {
 
 // ** Provides a boolean state value and a function to change the state value
 const ContentContext = createContext<ContentContextData>({
-  activeContent: "1",
+  activeContent: "11",
   setActiveContent: () => {},
 });
 
@@ -19,7 +19,7 @@ export const useContentContext = (): ContentContextData =>
 export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [activeContent, setActiveContent] = useState("1");
+  const [activeContent, setActiveContent] = useState("11");
 
   return (
     <ContentContext.Provider value={{ activeContent, setActiveContent }}>

@@ -5,7 +5,7 @@ import React from "react";
 import { Box, Typography, Link, Button } from "@mui/material";
 
 // ** Style Imports
-import styles from "./Landing.module.scss";
+import styles from "../styles/Landing.module.scss";
 
 const Landing = React.memo(function Landing(props) {
   return (

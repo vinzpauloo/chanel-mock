@@ -7,8 +7,8 @@ import App from "./App";
 import Home from "./pages/Home";
 
 // ** Style Imports
-import "./normalize.scss";
-import "./global.scss";
+import "./styles/global.scss";
+import "./styles/normalize.scss";
 
 // ** React Query Imports
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
