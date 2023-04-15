@@ -17,6 +17,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 // ** Project Imports
 import { useStickyHeader } from "../context/StickyHeaderContext";
+import { useContentContext } from "../context/HomeContentContext";
 
 interface HeaderProps {
   open: boolean;
@@ -25,18 +26,17 @@ interface HeaderProps {
 
 interface TopTabNavigationProps {
   selectedTab: string;
-  handleTabChange: (event: React.SyntheticEvent, newValue: string) => void;
   orientation?: "horizontal" | "vertical";
   marginLeft?: number;
 }
 
 const TopTabNavigation = (props: TopTabNavigationProps) => {
-  const {
-    selectedTab,
-    handleTabChange,
-    orientation = "horizontal",
-    marginLeft = 0,
-  } = props;
+  const { setActiveContent } = useContentContext();
+  const { selectedTab, orientation = "horizontal", marginLeft = 0 } = props;
+
+  const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
+    setActiveContent(newValue);
+  };
 
   return (
     <Tabs
@@ -66,18 +66,11 @@ const Header = ({ open, setOpen }: HeaderProps) => {
   const navigate = useNavigate();
   const { isHeaderFixed } = useStickyHeader();
 
-  const [selectedTab, setSelectedTab] = useState("1");
-
-  const handleTabChange = useCallback(
-    (event: React.SyntheticEvent, newValue: string) => {
-      setSelectedTab(newValue);
-    },
-    [setSelectedTab, selectedTab]
-  );
-
   const toggleDrawer = useCallback(() => {
     setOpen((prev) => !prev);
   }, [setOpen, open]);
+
+  const { activeContent } = useContentContext();
 
   return (
     <>
@@ -98,11 +91,7 @@ const Header = ({ open, setOpen }: HeaderProps) => {
         </Box>
       </Box>
       <Box sx={styles.tabWrapper}>
-        <TopTabNavigation
-          selectedTab={selectedTab}
-          handleTabChange={handleTabChange}
-          marginLeft={20}
-        />
+        <TopTabNavigation selectedTab={activeContent} marginLeft={20} />
       </Box>
       <Drawer anchor="left" open={open} onClose={toggleDrawer}>
         <Box width={250}>
@@ -112,8 +101,7 @@ const Header = ({ open, setOpen }: HeaderProps) => {
             </Button>
           </Box>
           <TopTabNavigation
-            selectedTab={selectedTab}
-            handleTabChange={handleTabChange}
+            selectedTab={activeContent}
             orientation="vertical"
           />
         </Box>

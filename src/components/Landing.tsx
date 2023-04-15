@@ -7,7 +7,7 @@ import { Box, Typography, Link, Button } from "@mui/material";
 // ** Style Imports
 import styles from "./Landing.module.scss";
 
-const Landing = () => {
+const Landing = React.memo(function Landing(props) {
   return (
     <Box className={styles.wrapper}>
       <Box className={`${styles.side} ${styles.left}`}>
@@ -36,6 +36,6 @@ const Landing = () => {
       </Box>
     </Box>
   );
-};
+});
 
 export default Landing;
