@@ -1,5 +1,5 @@
 // ** React Imports
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 // ** MUI Imports
 import { Box, Typography } from "@mui/material";
@@ -26,6 +26,26 @@ const MenuList = ({ items, color, title }: MenuListProps) => {
   );
 };
 
+const useDebounce = (callback: Function, delay: number) => {
+  const savedCallback = useRef(callback);
+  const timeoutId = useRef<ReturnType<typeof setTimeout>>();
+
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  const debouncedCallback = (...args: any[]) => {
+    if (timeoutId.current) {
+      clearTimeout(timeoutId.current);
+    }
+    timeoutId.current = setTimeout(() => {
+      callback(...args);
+    }, delay);
+  };
+
+  return debouncedCallback;
+};
+
 const Footer = () => {
   // ** Footer Menu Items Data
   const { exploreItems, onlineServices, boutiqueServices, theHouseOfMargaux } =
@@ -35,10 +55,14 @@ const Footer = () => {
   const { setIsHeaderFixed } = useStickyHeader();
   const bottomElementRef = useRef<HTMLDivElement>(null);
 
+  const setIsHeaderFixedDebounced = useDebounce((value: boolean) => {
+    setIsHeaderFixed(value);
+  }, 300);
+
   const handleIntersection = useCallback(
     (entries: IntersectionObserverEntry[]) => {
       const isVisible = entries[0].isIntersecting;
-      setIsHeaderFixed(!isVisible);
+      setIsHeaderFixedDebounced(!isVisible);
     },
     [setIsHeaderFixed]
   );
