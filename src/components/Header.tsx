@@ -43,6 +43,7 @@ const TopTabNavigation = (props: TopTabNavigationProps) => {
       value={selectedTab}
       onChange={handleTabChange}
       orientation={orientation}
+      sx={selectedTab === "11" ? hiddenIndicatorStyles : {}} // hiddenIndicatorStyles is used to hide the indicator when the default Landing Page is rendered
     >
       <Tab value="1" label="Haute Coutoure" sx={styles.menu} />
       <Tab value="2" label="Fashion" sx={styles.menu} />
@@ -96,7 +97,7 @@ const Header = ({ open, setOpen }: HeaderProps) => {
         </Box>
       </Box>
       <Box sx={styles.tabWrapper}>
-        <TopTabNavigation selectedTab={activeContent} marginLeft={20} />
+        <TopTabNavigation selectedTab={activeContent} marginLeft={5} />
       </Box>
       <Drawer anchor="left" open={open} onClose={toggleDrawer}>
         <Box width={250}>
@@ -113,6 +114,12 @@ const Header = ({ open, setOpen }: HeaderProps) => {
       </Drawer>
     </>
   );
+};
+
+const hiddenIndicatorStyles = {
+  "& .MuiTabs-indicator": {
+    display: "none",
+  },
 };
 
 const styles = {
@@ -136,17 +143,18 @@ const styles = {
   },
   titleText: {
     fontFamily: '"Montserrat", sans-serif',
-    fontSize: 50,
+    fontSize: 40,
     fontWeight: 900,
     textTransform: "uppercase",
     textAlign: "center",
     color: "#000",
+    letterSpacing: 2.5,
   },
   tabWrapper: {
     display: { xs: "none", md: "none", lg: "flex" },
     justifyContent: "space-evenly",
     alignItems: "center",
-    marginTop: "90px",
+    marginTop: "75px",
   },
   menu: {
     fontFamily: '"Montserrat", sans-serif',
