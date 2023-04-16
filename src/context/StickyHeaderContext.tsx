@@ -1,9 +1,8 @@
+// ** React Imports
 import React, { createContext, useContext, useState } from "react";
 
-interface StickyHeaderContextData {
-  isHeaderFixed: boolean;
-  setIsHeaderFixed: React.Dispatch<React.SetStateAction<boolean>>;
-}
+// ** Type Imports
+import { StickyHeaderContextData } from "../types/stickyHeaderContextTypes";
 
 // ** Provides a boolean state value and a function to change the state value
 const StickyHeaderContext = createContext<StickyHeaderContextData>({
@@ -12,7 +11,6 @@ const StickyHeaderContext = createContext<StickyHeaderContextData>({
 });
 
 // ** Exports
-
 // * Custom hook that uses the useContext hook to get the current state value and function from the context, which can be used by any child component that needs this information
 export const useStickyHeader = (): StickyHeaderContextData =>
   useContext(StickyHeaderContext);

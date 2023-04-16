@@ -2,6 +2,11 @@
 import { useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 
+// ** Context Providers
+import { StickyHeaderProvider } from "./context/StickyHeaderContext";
+import { ContentProvider } from "./context/HomeContentContext";
+import { theme } from "./theme/ThemeComponent";
+
 // ** MUI Imports
 import { Container } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
@@ -9,17 +14,13 @@ import { ThemeProvider } from "@mui/material/styles";
 // ** Project Imports
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-// *** Context Providers
-import { StickyHeaderProvider } from "./context/StickyHeaderContext";
-import { ContentProvider } from "./context/HomeContentContext";
-import { theme } from "./theme/ThemeComponent";
 
 // ** Third Party Imports
 import axios from "axios";
 
 axios.defaults.baseURL = "https://jsonplaceholder.typicode.com";
 
-function App() {
+const App = () => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -35,13 +36,13 @@ function App() {
       </ContentProvider>
     </ThemeProvider>
   );
-}
+};
 
 const styles = {
   wrapper: {
     display: "flex",
     flexDirection: "column",
-    minHeight: "500dvh",
+    minHeight: "100dvh",
     overflow: "hidden",
   },
 };

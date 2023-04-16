@@ -8,16 +8,8 @@ import { Box, Typography } from "@mui/material";
 import { FooterData } from "../data/FooterData";
 import { useStickyHeader } from "../context/StickyHeaderContext";
 
-interface MenuitemProps {
-  text: string;
-  color?: string;
-}
-
-interface MenuListProps {
-  items: string[];
-  color?: string;
-  title: string;
-}
+// ** Type Imports
+import { MenuitemProps, MenuListProps } from "../types/footerTypes";
 
 const MenuItem = ({ text, color }: MenuitemProps) => {
   return <Typography sx={[styles.menu, { color, mt: 1 }]}>{text}</Typography>;

@@ -1,23 +1,36 @@
 // ** React Imports
-import React, { lazy, Suspense, useMemo } from "react";
+import React, { lazy, Suspense, useMemo, useState } from "react";
 
 // ** MUI Imports
 import { Box, Button, Typography } from "@mui/material";
 
 // ** Project Imports
 import { useContentContext } from "../context/HomeContentContext";
+import Fashion from "../components/Fashion";
 
+const HauteCoutoure = lazy(() => import("../components/HauteCoutoure"));
 const Landing = lazy(() => import("../components/Landing"));
 
 const Home = () => {
   const { activeContent } = useContentContext();
 
+  const [open, setOpen] = useState(false);
+  const handleClose = React.useCallback(() => {
+    setOpen(false);
+  }, []);
+
+  React.useEffect(() => {
+    if (activeContent === "2") {
+      setOpen(true);
+    }
+  }, [activeContent]);
+
   const renderContent = useMemo(() => {
     switch (activeContent) {
       case "1":
-        return <Box>Haute Coutoure</Box>;
+        return <HauteCoutoure />;
       case "2":
-        return <Box>Fashion</Box>;
+        return <Fashion open={open} onClose={handleClose} />;
       case "3":
         return <Box>High Jewellery</Box>;
       case "4":
@@ -37,7 +50,7 @@ const Home = () => {
       default:
         return <Landing />;
     }
-  }, [activeContent]);
+  }, [activeContent, open, handleClose]);
 
   return (
     <Box sx={{ flex: 1 }}>

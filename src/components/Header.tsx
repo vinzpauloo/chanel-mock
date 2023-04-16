@@ -19,16 +19,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useStickyHeader } from "../context/StickyHeaderContext";
 import { useContentContext } from "../context/HomeContentContext";
 
-interface HeaderProps {
-  open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-interface TopTabNavigationProps {
-  selectedTab: string;
-  orientation?: "horizontal" | "vertical";
-  marginLeft?: number;
-}
+// ** Type Imports
+import { TopTabNavigationProps, HeaderProps } from "../types/headerTypes";
 
 const TopTabNavigation = (props: TopTabNavigationProps) => {
   const { setActiveContent } = useContentContext();

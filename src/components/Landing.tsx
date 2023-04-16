@@ -5,32 +5,60 @@ import React from "react";
 import { Box, Typography, Link, Button } from "@mui/material";
 import { useTheme } from "@mui/material";
 
+// ** Project Imports
+import { LandingImagesURL } from "../data/LandingPageData";
+
 // ** Style Imports
 import styles from "../styles/Landing.module.scss";
+
+// ** Type Imports
+import { ImageContainerProps } from "../types/landingTypes";
+
+const ImageContainer = ({
+  backgroundImage,
+  title,
+  details,
+}: ImageContainerProps) => {
+  const theme = useTheme();
+
+  return (
+    <Box
+      sx={{
+        backgroundImage: {
+          xs: backgroundImage.xs,
+          sm: backgroundImage.sm,
+          md: backgroundImage.md,
+          lg: backgroundImage.lg,
+        },
+        ...sxStyles.wrapper,
+      }}
+    >
+      <Box sx={sxStyles.titleWrapper}>
+        <Typography sx={sxStyles.title}>{title}</Typography>
+        <Typography sx={sxStyles.details}>{details}</Typography>
+        <Button
+          sx={{
+            ...sxStyles.button,
+            backgroundColor: theme.customColors.buttonBackground,
+            ":hover": {
+              backgroundColor: theme.customColors.buttonBackground,
+              textDecoration: "underline",
+            },
+          }}
+        >
+          See More
+        </Button>
+      </Box>
+    </Box>
+  );
+};
 
 const Landing = React.memo(function Landing(props) {
   const theme = useTheme();
 
-  const url =
-    "https://www.chanel.com/us/img/t_one/q_auto:good,fl_lossy,dpr_1.2,f_auto/w_1280/prd-emea/sys-master/content/P1/h82/h07/10177875804190-V2Homepage_Corpo_ONE_Desktop-Parallaxe.jpg";
-
-  const url2 =
-    "https://www.chanel.com/us/img/t_one/q_auto:good,fl_lossy,dpr_1.2,f_auto/w_1280/prd-emea/sys-master/content/P1/h9f/h31/10176359006238-NOPARALLAXE_HP_FASHION_Mobile.jpg";
-
-  const url3 =
-    "https://www.chanel.com/emea/img/t_one/q_auto:good,fl_lossy,dpr_1.2,f_auto/w_3000/prd-emea/sys-master/content/P1/hc1/h25/10174841782302-HP_CORPO_ONE_3400x1488px.jpg";
-
-  const url4 =
-    "https://www.chanel.com/emea/img/t_one/q_auto:good,fl_lossy,dpr_1.2,f_auto/w_642/prd-emea/sys-master/content/P1/h83/hf2/10177860501534-12666c15-0609-4829-882d-0c50af449496.jpeg";
-
-  const url5 =
-    "https://www.chanel.com/emea/img/t_one/q_auto:good,fl_lossy,dpr_1.2,f_auto/w_3000/prd-emea/sys-master/content/P1/h1d/hed/10125806895134-Homepage_HauteCouture_ONE_Desktop.jpg";
-
-  const url6 =
-    "https://www.chanel.com/emea/img/t_one/q_auto:good,fl_lossy,dpr_1.2,f_auto/w_3000/prd-emea/sys-master/content/P1/hfb/ha1/10072189141022-JENNIE_HPCorpo_D_SlidingHero_2880x1260px.jpg";
-
   return (
     <>
+      {/* First Container (Men/Women Fall/Winter Collection)*/}
       <Box className={styles.wrapper}>
         <Box className={`${styles.side} ${styles.left}`}>
           <Box className={`${styles.image} ${styles.man}`}></Box>
@@ -57,203 +85,72 @@ const Landing = React.memo(function Landing(props) {
           </Box>
         </Box>
       </Box>
-      {/* Second Container (Jennie Lie Bed) */}
-      <Box
-        sx={{
-          height: "100dvh",
-          backgroundImage: {
-            xs: `url(${url2})`,
-            sm: `url(${url})`,
-            md: `url(${url})`,
-            lg: `url(${url})`,
-          },
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          position: "relative",
+      {/* Second Container (Jennie) */}
+      <ImageContainer
+        backgroundImage={{
+          xs: `url(${LandingImagesURL.secondContainer.jennieMobile})`,
+          sm: `url(${LandingImagesURL.secondContainer.jennie})`,
+          md: `url(${LandingImagesURL.secondContainer.jennie})`,
+          lg: `url(${LandingImagesURL.secondContainer.jennie})`,
         }}
-      >
-        <Box
-          sx={{
-            position: "absolute",
-            bottom: "10rem",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Typography sx={componentStyles.title}>Fashion</Typography>
-          <Typography sx={componentStyles.details}>Margaux 22 Bag</Typography>
-          <Button
-            sx={{
-              width: "120px",
-              height: "4dvh",
-              backgroundColor: theme.customColors.buttonBackground,
-              ":hover": {
-                backgroundColor: theme.customColors.buttonBackground,
-                textDecoration: "underline",
-              },
-              fontSize: 12,
-              fontWeight: "600",
-            }}
-          >
-            See More
-          </Button>
-        </Box>
-      </Box>
-      {/* Third Container (WATCH) */}
-      <Box
-        sx={{
-          height: "100dvh",
-          backgroundImage: {
-            xs: `url(${url4})`,
-            sm: `url(${url3})`,
-            md: `url(${url3})`,
-            lg: `url(${url3})`,
-          },
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          position: "relative",
+        title="Fashion"
+        details="Margaux 22 Bag"
+      />
+      {/* Third Container (Watches) */}
+      <ImageContainer
+        backgroundImage={{
+          xs: `url(${LandingImagesURL.thirdContainer.watchesMobile})`,
+          sm: `url(${LandingImagesURL.thirdContainer.watches})`,
+          md: `url(${LandingImagesURL.thirdContainer.watches})`,
+          lg: `url(${LandingImagesURL.thirdContainer.watches})`,
         }}
-      >
-        <Box
-          sx={{
-            position: "absolute",
-            bottom: "10rem",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Typography sx={componentStyles.title}>Capture Collection</Typography>
-          <Typography sx={componentStyles.details}>
-            Margaux Interstellar
-          </Typography>
-          <Button
-            sx={{
-              width: "120px",
-              height: "4dvh",
-              backgroundColor: theme.customColors.buttonBackground,
-              ":hover": {
-                backgroundColor: theme.customColors.buttonBackground,
-                textDecoration: "underline",
-              },
-              fontSize: 12,
-              fontWeight: "600",
-            }}
-          >
-            See More
-          </Button>
-        </Box>
-      </Box>
-      {/* Fourth Container (Runway models) */}
-      <Box
-        sx={{
-          height: "100dvh",
-          backgroundImage: {
-            xs: `url(${url5})`,
-            sm: `url(${url5})`,
-            md: `url(${url5})`,
-            lg: `url(${url5})`,
-          },
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          position: "relative",
+        title="Capsule Collection"
+        details="Margaux Interstellar"
+      />
+      {/* Fourth Container (Models Walking) */}
+      <ImageContainer
+        backgroundImage={{
+          xs: `url(${LandingImagesURL.fourthContainer.modelWalk})`,
+          sm: `url(${LandingImagesURL.fourthContainer.modelWalk})`,
+          md: `url(${LandingImagesURL.fourthContainer.modelWalk})`,
+          lg: `url(${LandingImagesURL.fourthContainer.modelWalk})`,
         }}
-      >
-        <Box
-          sx={{
-            position: "absolute",
-            bottom: "10rem",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Typography sx={componentStyles.title}>Haute Coutoure</Typography>
-          <Typography sx={componentStyles.details}>
-            Spring-Summer 2023 Show
-          </Typography>
-          <Button
-            sx={{
-              width: "120px",
-              height: "4dvh",
-              backgroundColor: theme.customColors.buttonBackground,
-              ":hover": {
-                backgroundColor: theme.customColors.buttonBackground,
-                textDecoration: "underline",
-              },
-              fontSize: 12,
-              fontWeight: "600",
-            }}
-          >
-            See More
-          </Button>
-        </Box>
-      </Box>
+        title="Haute Coutoure"
+        details="Spring-Summer 2023 Show"
+      />
       {/* Fifth Container (Jennie) */}
-      <Box
-        sx={{
-          height: "100dvh",
-          backgroundImage: {
-            xs: `url(${url6})`,
-            sm: `url(${url6})`,
-            md: `url(${url6})`,
-            lg: `url(${url6})`,
-          },
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          position: "relative",
+      <ImageContainer
+        backgroundImage={{
+          xs: `url(${LandingImagesURL.fifthContainer.jennie})`,
+          sm: `url(${LandingImagesURL.fifthContainer.jennie})`,
+          md: `url(${LandingImagesURL.fifthContainer.jennie})`,
+          lg: `url(${LandingImagesURL.fifthContainer.jennie})`,
         }}
-      >
-        <Box
-          sx={{
-            position: "absolute",
-            bottom: "10rem",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Typography sx={componentStyles.title}>Fine Jewellery</Typography>
-          <Typography sx={componentStyles.details}>Coco Crush</Typography>
-          <Button
-            sx={{
-              width: "120px",
-              height: "4dvh",
-              backgroundColor: theme.customColors.buttonBackground,
-              ":hover": {
-                backgroundColor: theme.customColors.buttonBackground,
-                textDecoration: "underline",
-              },
-              fontSize: 12,
-              fontWeight: "600",
-            }}
-          >
-            See More
-          </Button>
-        </Box>
-      </Box>
+        title="Fine Jewellery"
+        details="Coco Crush"
+      />
     </>
   );
 });
 
-const componentStyles = {
+const sxStyles = {
+  wrapper: {
+    height: "100dvh",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "relative",
+  },
+  titleWrapper: {
+    position: "absolute",
+    bottom: "10rem",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
   title: {
     color: "#FFF",
     textAlign: "center",
@@ -271,6 +168,12 @@ const componentStyles = {
     fontFamily: '"Montserrat", sans-serif',
     fontSize: 23,
     letterSpacing: 4,
+  },
+  button: {
+    width: "120px",
+    height: "4dvh",
+    fontSize: 12,
+    fontWeight: "600",
   },
 };
 

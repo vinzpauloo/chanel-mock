@@ -6,12 +6,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
 import Home from "./pages/Home";
 
+// ** React Query Imports
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+
 // ** Style Imports
 import "./styles/global.scss";
 import "./styles/normalize.scss";
-
-// ** React Query Imports
-import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
 const container = document.getElementById("root");
 const root = createRoot(container!);
